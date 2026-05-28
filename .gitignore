@@ -11,7 +11,7 @@ Thumbs.db
 # Rust
 target/
 **/*.rs.bk
-
+.env
 # Python bytecode and caches
 __pycache__/
 *.py[cod]
