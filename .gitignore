@@ -1,0 +1,51 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor and local tooling
+.idea/
+.vscode/
+*.swp
+*.swo
+*/.so
+# Rust
+target/
+**/*.rs.bk
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+
+# Python virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Python packaging/build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+wheels/
+.maturin/
+
+# Jupyter
+.ipynb_checkpoints/
+notebooks/
+
+# Environment files
+.env
+.env.*
+!.env.example
