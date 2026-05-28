@@ -174,7 +174,7 @@ When developing this repository from source, use Cargo to run the workspace
 binary:
 
 ```sh
-cargo run -p mc-lint -- rust/crates/symcoe-core/src
+cargo run -p mc-lint -- path/to/crate/src
 ```
 
 Successful output:
@@ -186,7 +186,7 @@ mc-lint: ok
 Violations are reported in compiler-style form so editors and CI can parse them:
 
 ```text
-rust/crates/symcoe-core/src/path.rs:42:17: error: hot path violation in `evolve_paths`: allocation-like call `Vec::new` is not allowed
+path/to/crate/src/path.rs:42:17: error: hot path violation in `evolve_paths`: allocation-like call `Vec::new` is not allowed
 ```
 
 ## VS Code Task Example
