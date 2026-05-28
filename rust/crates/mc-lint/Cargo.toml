@@ -1,6 +1,6 @@
 [package]
 name = "mc-lint"
-description = "CLI linter for marking and checking Monte Carlo simulation hot paths."
+description = "CLI linter and marker attributes for checking Monte Carlo simulation hot paths."
 documentation = "https://docs.rs/mc-lint"
 version.workspace = true
 edition.workspace = true
@@ -16,6 +16,7 @@ path = "src/main.rs"
 
 [dependencies]
 clap = { version = "4.5", features = ["derive"] }
+mc-lint-attr = { version = "0.1.0", path = "../mc-lint-attr" }
 proc-macro2 = { version = "1.0", features = ["span-locations"] }
 quote = "1.0"
 syn = { version = "2.0", features = ["full", "visit"] }

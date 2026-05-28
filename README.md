@@ -4,6 +4,30 @@ Monte Carlo Linter keeps simulation hot paths dense, allocation-free, and predic
 
 Use it for code where small per-path costs multiply across many paths, timesteps, trials, or scenarios.
 
+## Installation
+
+Install the CLI from crates.io:
+
+```sh
+cargo install mc-lint
+```
+
+Add the marker attributes to any crate you want to annotate:
+
+```sh
+cargo add mc-lint
+```
+
+Or add `mc-lint` alongside your crate's existing dependencies:
+
+```toml
+[dependencies]
+serde = "1"
+mc-lint = "0.1"
+```
+
+
+
 ## Annotating Hot Paths
 
 Add `#[hot_path]` to a hot-path root:
@@ -143,10 +167,11 @@ Allow with `#[hot_path(allow_panics)]`.
 Run the linter against the Rust source directory that contains your hot-path code:
 
 ```sh
-cargo run -p mc-lint -- path/to/crate/src
+mc-lint path/to/crate/src
 ```
 
-The current workspace example scans `symcoe-core`:
+When developing this repository from source, use Cargo to run the workspace
+binary:
 
 ```sh
 cargo run -p mc-lint -- rust/crates/symcoe-core/src
@@ -172,7 +197,7 @@ The repository includes a VS Code task that runs the current example and wires t
 {
   "label": "mc-lint hot paths",
   "type": "shell",
-  "command": "cargo run -p mc-lint -- rust/crates/my-crate/src",
+  "command": "mc-lint rust/crates/my-crate/src",
   "problemMatcher": {
     "owner": "mc-lint",
     "fileLocation": ["relative", "${workspaceFolder}"],
@@ -192,5 +217,5 @@ The repository includes a VS Code task that runs the current example and wires t
 For another crate, change the final path in the command:
 
 ```json
-"command": "cargo run -p mc-lint -- path/to/crate/src"
+"command": "mc-lint path/to/crate/src"
 ```
