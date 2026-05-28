@@ -23,7 +23,7 @@ Or add `mc-lint` alongside your crate's existing dependencies:
 ```toml
 [dependencies]
 serde = "1"
-mc-lint = "0.1"
+mc-lint = "1.0.0"
 ```
 
 
