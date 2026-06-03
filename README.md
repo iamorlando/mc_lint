@@ -2,6 +2,16 @@
 
 Monte Carlo Linter keeps simulation hot paths dense, allocation-free, and predictable. Mark the functions that run in the inner loop with `#[hot_path]`; the linter treats those functions and the functions they call as hot code, then rejects operations that usually do not belong in a Monte Carlo kernel.
 
+
+| Rejected Operations | Description | Opt-Out |
+| --- | --- | --- |
+| Validation | `?`, checked arithmetic, conversions, and error adaptation. | `allow_validation` |
+| Allocation | Heap allocation, collection, cloning to owned buffers, and `vec!`. | `allow_allocation` |
+| Branching | `if` and `match` control flow in hot paths. | `allow_branching` |
+| Logging | `log`, `tracing`, `println!`, and `eprintln!`. | `allow_logging` |
+| Panics | `panic`, `todo`, `unimplemented`, `unwrap`, `expect`, and `assert!`. | `allow_panics` |
+| Formatting | String formatting via `format!`, `write!`, and `writeln!`. | `allow_formatting` |
+
 > [!TIP]
 > **TL;DR**
 >
