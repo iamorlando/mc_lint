@@ -26,20 +26,6 @@ pub fn hot_path(args: TokenStream, input: TokenStream) -> TokenStream {
     expand_marker_attribute("hot_path", args, input)
 }
 
-/// Marks a function as a hot-path boundary.
-///
-/// Intended meaning for the linter:
-///
-/// - the boundary function itself may do setup/validation
-/// - hotness should not automatically propagate through every call
-/// - explicitly marked calls inside can still be hot roots
-///
-/// The macro preserves the function unchanged.
-#[proc_macro_attribute]
-pub fn hot_path_boundary(args: TokenStream, input: TokenStream) -> TokenStream {
-    expand_marker_attribute("hot_path_boundary", args, input)
-}
-
 fn expand_marker_attribute(
     attribute_name: &str,
     args: TokenStream,

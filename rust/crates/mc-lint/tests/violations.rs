@@ -225,6 +225,43 @@ impl Kernel {
 }
 
 #[test]
+fn hot_path_impl_root_reports_violations_in_indirect_free_callees() {
+    let source = TempSource::new(
+        "impl-root-indirect-free-callee",
+        r#"
+struct Kernel;
+
+impl Kernel {
+    #[hot_path]
+    fn run(&self, state: &mut u32) {
+        first_step(state);
+    }
+}
+
+fn first_step(state: &mut u32) {
+    allocate_in_indirect_callee(state);
+}
+
+fn allocate_in_indirect_callee(state: &mut u32) {
+    *state += 1;
+    let _allocation = vec![*state];
+}
+"#,
+    );
+
+    let output = run_linter(source.path());
+    let stderr = assert_failed(output);
+
+    assert_contains_all(
+        &stderr,
+        &[
+            "hot path violation in `allocate_in_indirect_callee`",
+            "allocation macro `vec!` is not allowed",
+        ],
+    );
+}
+
+#[test]
 fn hot_path_checks_documented_method_calls() {
     let source = TempSource::new(
         "documented-method-calls",

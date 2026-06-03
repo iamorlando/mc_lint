@@ -2,6 +2,29 @@
 
 Monte Carlo Linter keeps simulation hot paths dense, allocation-free, and predictable. Mark the functions that run in the inner loop with `#[hot_path]`; the linter treats those functions and the functions they call as hot code, then rejects operations that usually do not belong in a Monte Carlo kernel.
 
+> [!TIP]
+> **TL;DR**
+>
+> ```sh
+> cargo add mc-lint
+> cargo install mc-lint
+> ```
+>
+> ```rust
+> use mc_lint::hot_path;
+>
+> #[hot_path]
+> fn evolve_paths(states: &mut [PathState], shocks: &[f64], dt: f64) {
+>     for state in states {
+>         evolve_one_step(state, shocks, dt);
+>     }
+> }
+> ```
+>
+> ```sh
+> mc-lint path/to/crate/src
+> ```
+
 Use it for code where small per-path costs multiply across many paths, timesteps, trials, or scenarios.
 
 ## Installation
@@ -23,7 +46,7 @@ Or add `mc-lint` alongside your crate's existing dependencies:
 ```toml
 [dependencies]
 serde = "1"
-mc-lint = "1.0.0"
+mc-lint = "1.1.0"
 ```
 
 

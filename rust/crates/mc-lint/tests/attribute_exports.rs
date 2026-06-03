@@ -1,4 +1,4 @@
-use mc_lint::{hot_path, hot_path_boundary};
+use mc_lint::hot_path;
 
 #[hot_path(allow_branching, allow_validation)]
 fn marked_hot_path(input: &[f64]) -> Option<f64> {
@@ -9,12 +9,16 @@ fn marked_hot_path(input: &[f64]) -> Option<f64> {
     Some(input.iter().copied().sum())
 }
 
-#[hot_path_boundary]
-fn marked_boundary(input: &[f64]) -> Option<f64> {
-    marked_hot_path(input)
+struct Kernel;
+
+impl Kernel {
+    #[hot_path]
+    fn marked_method(&self, input: &[f64]) -> Option<f64> {
+        marked_hot_path(input)
+    }
 }
 
 #[test]
 fn public_attribute_reexports_compile() {
-    assert_eq!(marked_boundary(&[1.0, 2.0, 3.0]), Some(6.0));
+    assert_eq!(Kernel.marked_method(&[1.0, 2.0, 3.0]), Some(6.0));
 }

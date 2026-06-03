@@ -12,4 +12,4 @@
 //! }
 //! ```
 
-pub use mc_lint_attr::{hot_path, hot_path_boundary};
+pub use mc_lint_attr::hot_path;
